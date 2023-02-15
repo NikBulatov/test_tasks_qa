@@ -19,8 +19,8 @@ class CodeKey:
 
         value_field_code = getattr(self, "code")
         if value_field_code_format == 'W26':
-            facility_part = int(value_field_code[2:4], 16)
-            after_common_part = int(value_field_code[4:8], 16)
+            facility_part = str(int(value_field_code[2:4], 16)).zfill(3)
+            after_common_part = str(int(value_field_code[4:8], 16)).zfill(5)
             codekey = f"{facility_part},{after_common_part}"
         elif value_field_code_format == 'W34':
             codekey = int(value_field_code[2:10], 16)
