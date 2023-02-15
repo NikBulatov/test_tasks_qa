@@ -20,18 +20,21 @@ async def my_fun_1():
 
 async def my_fun_2():
     """Write your code here"""
-    await asyncio.sleep(3)
+    await asyncio.sleep(5)
     print('5 seconds have passed')
 
 
 async def main():
     start = time.time()
+    
     while True:
-        tasks = (asyncio.create_task(coroutine)
-                 for coroutine in (my_fun_1(), my_fun_2()))
-        for task in tasks:
+        task_1 = asyncio.create_task(my_fun_1())
+        task_2 = asyncio.create_task(my_fun_2())
+        
+        for task in task_1, task_2:
             await task
             print(time.time() - start, '\n')
+
 
 
 if __name__ == '__main__':
