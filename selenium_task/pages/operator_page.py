@@ -8,13 +8,10 @@ class OperatorPage(BasePage):
 
     def should_be_operator_page(self, url):
         self.should_be_widgets_title()
-        self.should_be_widget_url(url)
-
-    def should_be_widget_url(self, url):
-        assert self.browser.current_url == url
+        self.should_be_correct_url(url)
 
     def should_be_widgets_title(self):
-        # TODO: language choosing should be in another place
+        # TODO language choosing should be in another place
         title = {
             'ru': 'Виджеты',
             'en': 'Widgets'
