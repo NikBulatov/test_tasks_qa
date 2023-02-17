@@ -13,11 +13,7 @@ class BasePage:
     def open(self):
         self.browser.get(self.url)
 
-    def is_element_present(self, how, what, timeout=1):
-        # try:
-        #     WebDriverWait(self.browser, timeout).until(
-        #         EC.presence_of_element_located((how, what)))
-        # except TimeoutException:
+    def is_element_present(self, how, what):
         try:
             self.browser.find_element(how, what)
         except NoSuchElementException:

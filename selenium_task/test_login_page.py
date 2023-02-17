@@ -11,8 +11,6 @@ load_dotenv('../.env')
 
 class TestCase:
     URL = 'http://s2.corp.sigur.com/'
-    LOGIN_URL = 'http://s2.corp.sigur.com/login'
-    OPERATOR_URL = 'http://s2.corp.sigur.com/widgets/visits'
     EMPLOYEES_URL = 'http://s2.corp.sigur.com/system/employees'
 
     def test_operator_go_to_login_page(self, browser):
@@ -20,11 +18,11 @@ class TestCase:
                            os.getenv('OPERATOR_PASSWORD'))
         login_page = LoginPage(browser, TestCase.URL)
         login_page.open()
-        login_page.should_be_login_page(TestCase.LOGIN_URL)
+        login_page.should_be_login_page()
         login_page.login_operator(login, password)
 
         operator_page = OperatorPage(browser, browser.current_url)
-        operator_page.should_be_operator_page(TestCase.OPERATOR_URL)
+        operator_page.should_be_operator_page()
 
         employee_page = EmployeePage(browser, TestCase.EMPLOYEES_URL)
         employee_page.open()

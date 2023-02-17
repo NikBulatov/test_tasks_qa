@@ -11,12 +11,12 @@ class EmployeePage(BasePage):
         "last_name": "Testovich",
 
         # TODO add data below
-        # "Position": "Manager",  # !!!
+        # "Position": "Manager",  # select
         # "Number": "01",
         # "Email": "test@example.com",
         # "Phone number": "+7(123) 159-95-75",
         # "Telegram chat ID": "-9658412",
-        # "Communication method": '',
+        # "Communication method": '',  # select
     }
     EMPLOYEE_NAME = 'Testov Test Testovich'
     COMMENT_DATA = 'Comment'
@@ -38,9 +38,7 @@ class EmployeePage(BasePage):
         self.should_be_add_new_employee_form()
 
     def add_new_employee(self):
-        # TODO add photo
-        # self.browser.find_element(
-        #     EmployeePageLocators.ADD_PHOTO_BUTTON).send_keys('')
+        # TODO add photo and other fields
 
         input_text_fields = self.browser.find_elements(
             *EmployeePageLocators.INPUT_FIELDS)[:3]
@@ -77,13 +75,15 @@ class EmployeePage(BasePage):
         assert self.is_element_present(
             *EmployeePageLocators.EMPLOYEE_NAME_IN_CARD)
         assert self.browser.find_element(
-            *EmployeePageLocators.EMPLOYEE_NAME_IN_CARD).text == EmployeePage.EMPLOYEE_NAME
+            *EmployeePageLocators.EMPLOYEE_NAME_IN_CARD
+        ).text == EmployeePage.EMPLOYEE_NAME
 
     def should_be_correct_comments(self):
         assert self.is_element_present(
             *EmployeePageLocators.EMPLOYEE_COMMENT_FIELD)
         assert self.browser.find_element(
-            *EmployeePageLocators.EMPLOYEE_COMMENT_FIELD).text == EmployeePage.COMMENT_DATA
+            *EmployeePageLocators.EMPLOYEE_COMMENT_FIELD
+        ).text == EmployeePage.COMMENT_DATA
 
     def open_employee_card_info(self, employee_list):
         employee_list[0].click()

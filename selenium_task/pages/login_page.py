@@ -3,14 +3,14 @@ from .locators import LoginPageLocators
 
 
 class LoginPage(BasePage):
-    LINK = 'http://selenium1py.pythonanywhere.com/accounts/login/'
+    LOGIN_URL = 'http://s2.corp.sigur.com/login'
 
     def __init__(self, *args, **kwargs):
         super(LoginPage, self).__init__(*args, **kwargs)
 
-    def should_be_login_page(self, login_url: str):
+    def should_be_login_page(self):
         self.should_be_login_form()
-        self.should_be_correct_url(login_url)
+        self.should_be_correct_url(LoginPage.LOGIN_URL)
 
     def should_be_login_form(self):
         assert self.is_element_present(

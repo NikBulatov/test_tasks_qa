@@ -38,11 +38,11 @@ class EmployeePageLocators:
         '#NewEmployeeForm .MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputMultiline')
     SUBMIT_ADD_EMPLOYEE_BUTTON = (
         By.CSS_SELECTOR, 'button.MuiButtonBase-root.MuiButton-root')
-    # ADD_PHOTO_BUTTON = (By.CSS_SELECTOR, '#NewEmployeeForm button')  # 1st elmnt
 
     EMPLOYEE_LINK_LIST = (
         By.CSS_SELECTOR,
         'div[data-testid="page-content"] div[aria-label="grid"] .MuiTypography-root.MuiTypography-body1.MuiTypography-colorTextPrimary')
+    # use in web element which was founded by EMPLOYEE_LINK_LIST locator
     EMPLOYEE_NAME_IN_LIST = (By.XPATH, './/div[1]')
 
     EMPLOYEE_CARD_BLOCK = (
