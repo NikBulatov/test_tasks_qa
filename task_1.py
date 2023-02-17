@@ -1,3 +1,5 @@
+from time import time
+
 """
 Python 1
 Задание:
@@ -10,13 +12,34 @@ Python 1
 
 
 def my_fun_1():
-    """Write your code here"""
-    print('2 seconds have passed')
+    current = time()
+    try:
+        my_fun_1.passed += current - my_fun_1.prev_time
+    except Exception:
+        my_fun_1.printed = False
+        my_fun_1.passed = 0
+
+    my_fun_1.prev_time = current
+
+    if my_fun_1.passed >= 2:
+        print('2 seconds have passed')
+        my_fun_1.passed = 0
 
 
 def my_fun_2():
     """Write your code here"""
-    print('5 seconds have passed')
+    current = time()
+    try:
+        my_fun_2.passed += current - my_fun_2.prev_time
+    except Exception:
+        my_fun_2.printed = False
+        my_fun_2.passed = 0
+
+    my_fun_2.prev_time = current
+
+    if my_fun_2.passed >= 5:
+        print('5 seconds have passed')
+        my_fun_2.passed = 0
 
 
 def main():
