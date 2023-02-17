@@ -1,5 +1,3 @@
-import time
-
 """
 Python 1
 Задание:
@@ -12,23 +10,20 @@ Python 1
 
 
 def my_fun_1():
-    '''Write your code here'''
-    time.sleep(2)
-    print ('2 seconds have passed')
-    
-    
+    """Write your code here"""
+    print('2 seconds have passed')
+
+
 def my_fun_2():
-    '''Write your code here'''
-    time.sleep(3)
-    print ('5 seconds have passed')
-    
-    
+    """Write your code here"""
+    print('5 seconds have passed')
+
+
 def main():
-    start = time.time()
     while True:
         my_fun_1()
         my_fun_2()
-        
-        
+
+
 if __name__ == '__main__':
     main()
