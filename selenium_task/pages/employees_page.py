@@ -9,15 +9,17 @@ class EmployeePage(BasePage):
         "second_name": "Testov",
         "first_name": "Test",
         "last_name": "Testovich",
-        "Position": "Manager",  # !!!
-        "Number": "01",
-        # TODO add contact data
+
+        # TODO add data below
+        # "Position": "Manager",  # !!!
+        # "Number": "01",
         # "Email": "test@example.com",
         # "Phone number": "+7(123) 159-95-75",
         # "Telegram chat ID": "-9658412",
         # "Communication method": '',
     }
     EMPLOYEE_NAME = 'Testov Test Testovich'
+    COMMENT_DATA = 'Comment'
 
     def __init__(self, *args, **kwargs):
         super(EmployeePage, self).__init__(*args, **kwargs)
@@ -41,40 +43,52 @@ class EmployeePage(BasePage):
         #     EmployeePageLocators.ADD_PHOTO_BUTTON).send_keys('')
 
         input_text_fields = self.browser.find_elements(
-            *EmployeePageLocators.INPUT_FIELDS)[:5]
+            *EmployeePageLocators.INPUT_FIELDS)[:3]
 
         for field, value in zip(input_text_fields,
                                 EmployeePage.FORM_DATA.values()):
             field.send_keys(value)
 
         self.browser.find_element(
-            *EmployeePageLocators.INPUT_COMMENTS_FIELD).send_keys('Comment')
+            *EmployeePageLocators.INPUT_COMMENTS_FIELD).send_keys(
+            EmployeePage.COMMENT_DATA)
 
         self.browser.find_element(
             *EmployeePageLocators.SUBMIT_ADD_EMPLOYEE_BUTTON).click()
 
-    def should_be_created_new_employee(self, employee_name):
-        new_employee_name = None
+    def should_be_created_new_employee(self):
+        employee_list = None
         try:
-            employee_names = self.browser.find_elements(
-                *EmployeePageLocators.EMPLOYEE_LIST)
-            new_employee_name = [name for name in employee_names
-                                 if name.text() == employee_name][
-                0]
+            employee_list = [name for name in self.browser.find_elements(
+                *EmployeePageLocators.EMPLOYEE_LINK_LIST) if
+                             name.text == EmployeePage.EMPLOYEE_NAME]
+            if EmployeePage.EMPLOYEE_NAME not in map(lambda x: x.text,
+                                                     employee_list):
+                raise NoSuchElementException
+            self.open_employee_card_info(employee_list)
         except NoSuchElementException:
-            assert new_employee_name.text() is not None, "Employee doesn't exist"
+            assert employee_list is not None, "Employee doesn't exist"
 
     def should_be_employee_card_block(self):
-        self.is_element_present(*EmployeePageLocators.EMPLOYEE_CARD_BLOCK)
+        assert self.is_element_present(
+            *EmployeePageLocators.EMPLOYEE_CARD_BLOCK)
 
     def should_be_correct_employee_name(self):
         assert self.is_element_present(
-            *EmployeePageLocators.EMPLOYEE_NAME_IN_CARD).text() == EmployeePage.EMPLOYEE_NAME
+            *EmployeePageLocators.EMPLOYEE_NAME_IN_CARD)
+        assert self.browser.find_element(
+            *EmployeePageLocators.EMPLOYEE_NAME_IN_CARD).text == EmployeePage.EMPLOYEE_NAME
 
-    def open_employee_card_info(self):
-        employee_names = self.browser.find_elements(
-            *EmployeePageLocators.EMPLOYEE_LIST)
-        [name for name in employee_names if
-         name.text() == 'Testov Test Testovich'][0].click()
+    def should_be_correct_comments(self):
+        assert self.is_element_present(
+            *EmployeePageLocators.EMPLOYEE_COMMENT_FIELD)
+        assert self.browser.find_element(
+            *EmployeePageLocators.EMPLOYEE_COMMENT_FIELD).text == EmployeePage.COMMENT_DATA
+
+    def open_employee_card_info(self, employee_list):
+        employee_list[0].click()
         self.should_be_employee_card_block()
+
+    def should_be_correct_employee_data(self):
         self.should_be_correct_employee_name()
+        self.should_be_correct_comments()

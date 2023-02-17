@@ -29,7 +29,7 @@ class EmployeePageLocators:
     RU_ADD_EMPLOYEE_BUTTON = (
         By.CSS_SELECTOR,  # TODO for English
         '.MuiButtonBase-root[title="Добавить нового сотрудника"]')
-    ADD_EMPLOYEE_FORM = (By.ID, 'NewEmployeeForm')
+    ADD_EMPLOYEE_FORM = (By.ID, '#NewEmployeeForm')
     INPUT_FIELDS = (
         By.CSS_SELECTOR,  # TODO another selector
         '#NewEmployeeForm .MuiInputBase-input.MuiOutlinedInput-input[type="text"]')
@@ -40,10 +40,15 @@ class EmployeePageLocators:
         By.CSS_SELECTOR, 'button.MuiButtonBase-root.MuiButton-root')
     # ADD_PHOTO_BUTTON = (By.CSS_SELECTOR, '#NewEmployeeForm button')  # 1st elmnt
 
-    EMPLOYEE_LIST = (
+    EMPLOYEE_LINK_LIST = (
         By.CSS_SELECTOR,
-        '.MuiBox-root .MuiTypography-colorTextPrimary > div:nth-child(2)')
+        'div[data-testid="page-content"] div[aria-label="grid"] .MuiTypography-root.MuiTypography-body1.MuiTypography-colorTextPrimary')
+    EMPLOYEE_NAME_IN_LIST = (By.XPATH, './/div[1]')
+
     EMPLOYEE_CARD_BLOCK = (
         By.CSS_SELECTOR, 'div[role="tabpanel"] > .MuiBox-root')
     EMPLOYEE_NAME_IN_CARD = (
         By.CSS_SELECTOR, '.MuiTypography-root.MuiTypography-h4')
+    EMPLOYEE_COMMENT_FIELD = (
+        By.XPATH,
+        '(//*[contains(@class, "MuiTypography-h6")])[1]/following-sibling::div')

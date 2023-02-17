@@ -35,5 +35,5 @@ class TestCase:
         employee_page.open_employee_form()
         employee_page.add_new_employee()
 
-        employee_page.should_be_created_new_employee(employee_name)
-        employee_page.open_employee_card_info(employee_name)
+        employee_page.should_be_created_new_employee()
+        employee_page.should_be_correct_employee_data()
