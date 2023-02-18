@@ -16,7 +16,6 @@ def my_fun_1():
     try:
         my_fun_1.passed += current - my_fun_1.prev_time
     except Exception:
-        my_fun_1.printed = False
         my_fun_1.passed = 0
 
     my_fun_1.prev_time = current
@@ -32,7 +31,6 @@ def my_fun_2():
     try:
         my_fun_2.passed += current - my_fun_2.prev_time
     except Exception:
-        my_fun_2.printed = False
         my_fun_2.passed = 0
 
     my_fun_2.prev_time = current
