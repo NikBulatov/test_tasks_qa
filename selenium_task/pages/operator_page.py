@@ -3,7 +3,7 @@ from .locators import MainPageLocators
 
 
 class OperatorPage(BasePage):
-    OPERATOR_URL = 'http://s2.corp.sigur.com/widgets/visits'
+    OPERATOR_URL = 'http://172.19.5.189/widgets/visits'
 
     def __init__(self, *args, **kwargs):
         super(OperatorPage, self).__init__(*args, **kwargs)
